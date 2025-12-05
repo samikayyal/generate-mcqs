@@ -141,15 +141,6 @@ def get_mime_type(file_path: pathlib.Path) -> str:
     mime_types = {
         ".pdf": "application/pdf",
         ".txt": "text/plain",
-        ".md": "text/markdown",
-        ".html": "text/html",
-        ".htm": "text/html",
-        ".json": "application/json",
-        ".xml": "application/xml",
-        ".csv": "text/csv",
-        ".py": "text/x-python",
-        ".js": "text/javascript",
-        ".ts": "text/typescript",
         ".pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     }
     return mime_types.get(extension, "text/plain")
