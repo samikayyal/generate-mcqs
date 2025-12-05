@@ -1,0 +1,16 @@
+[project]
+name = "generate-mcqs"
+version = "0.1.0"
+description = "Generate multiple choice questions from documents using Gemini API"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "google-genai>=1.0.0",
+    "pydantic>=2.0.0",
+    "flask>=3.0.0",
+    "python-pptx>=1.0.0",
+    "python-dotenv>=1.2.1",
+]
+
+[project.scripts]
+generate-mcqs = "main:main"

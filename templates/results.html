@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h1>Quiz Complete!</h1>
+
+    <div class="score">
+        {{ correct_count }} / {{ total }}
+    </div>
+
+    <p style="text-align: center; color: #666; margin-bottom: 32px;">
+        You got {{ correct_count }} out of {{ total }} questions correct
+        ({{ ((correct_count / total) * 100) | round | int }}%)
+    </p>
+
+    <h2 style="margin-bottom: 16px; font-size: 1.2rem;">Review:</h2>
+
+    {% for item in results %}
+    <div class="result-item {% if item.is_correct %}correct{% else %}incorrect{% endif %}">
+        <p class="result-question">{{ loop.index }}. {{ item.question.text }}</p>
+        <p class="result-answer">
+            Your answer:
+            <span class="{% if item.is_correct %}correct-text{% else %}incorrect-text{% endif %}">
+                {{ item.selected.text if item.selected else "No answer" }}
+            </span>
+        </p>
+        {% if not item.is_correct %}
+        <p class="result-answer">
+            Correct answer: <span class="correct-text">{{ item.correct.text }}</span>
+        </p>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+        <a href="{{ url_for('index') }}" class="btn" style="text-decoration: none;">
+            Restart Quiz
+        </a>
+        {% if has_wrong_answers %}
+        <a href="{{ url_for('retry_wrong') }}" class="btn" style="text-decoration: none; background-color: #e67e22;">
+            Retry Wrong Questions ({{ total - correct_count }})
+        </a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

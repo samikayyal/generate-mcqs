@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h1>Question {{ question_num }}</h1>
+    <p class="progress">{{ question_num }} of {{ total_questions }}</p>
+
+    <p class="question-text">{{ question.text }}</p>
+
+    <form method="POST">
+        <div class="options">
+            {% for option in question.options %}
+            <label class="option 
+                {% if show_answer %}disabled{% endif %}
+                {% if show_answer and option.option_id == correct_option %}correct{% endif %}
+                {% if show_answer and option.option_id == selected_option and option.option_id != correct_option %}incorrect{% endif %}
+            ">
+                <input type="radio" name="answer" value="{{ option.option_id }}" {% if show_answer %}disabled{% endif %}
+                    {% if selected_option==option.option_id %}checked{% endif %}>
+                <span>{{ option.text }}</span>
+            </label>
+            {% endfor %}
+        </div>
+
+        {% if show_answer %}
+        {% if selected_option == correct_option %}
+        <div class="feedback correct">
+            ✓ Correct!
+        </div>
+        {% else %}
+        <div class="feedback incorrect">
+            ✗ Incorrect. The correct answer is highlighted above.
+        </div>
+        {% endif %}
+
+        <button type="submit" name="action" value="next" class="btn">
+            {% if question_num < total_questions %}Next Question →{% else %}See Results →{% endif %} </button>
+                {% else %}
+                <button type="submit" name="action" value="submit" class="btn">
+                    Submit Answer
+                </button>
+                {% endif %}
+    </form>
+</div>
+{% endblock %}

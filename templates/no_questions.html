@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="text-align: center;">
+    <h1>No Questions Found</h1>
+
+    <p style="margin: 24px 0; color: #666;">
+        The database is empty. Please generate some questions first using:
+    </p>
+
+    <code style="display: block; background: #f5f5f5; padding: 16px; border-radius: 8px; font-size: 0.9rem;">
+        python main.py &lt;your-document.pdf&gt; [num_questions]
+    </code>
+
+    <p style="margin-top: 24px; color: #666;">
+        Then refresh this page to start the quiz.
+    </p>
+</div>
+{% endblock %}
